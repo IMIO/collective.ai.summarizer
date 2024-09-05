@@ -1,0 +1,39 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  i18n_domain="collective.ai.summarizer">
+
+  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+  <include package="z3c.jbot" file="meta.zcml"/>
+  <browser:jbot
+    directory="overrides"
+    layer="collective.ai.summarizer.interfaces.ICollectiveAiSummarizerLayer"
+  />
+
+  <!-- Publish static files -->
+  <plone:static
+    name="collective.ai.summarizer"
+    type="plone"
+    directory="static"
+  />
+
+  <browser:page
+    name="ai-summarizer-view"
+    for="*"
+    class=".action.AiSummarizerView"
+    permission="cmf.ModifyPortalContent"
+    layer="collective.ai.summarizer.interfaces.ICollectiveAiSummarizerLayer"
+    allowed_attributes="available summarize"
+    />
+
+
+  <browser:page
+    name="ai-summarizer-settings"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".controlpanel.AiSummarizerControlPanelView"
+    permission="cmf.ManagePortal"
+    layer="collective.ai.summarizer.interfaces.ICollectiveAiSummarizerLayer"
+  />
+
+</configure>
