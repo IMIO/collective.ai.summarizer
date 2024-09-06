@@ -25,11 +25,15 @@
     permission="cmf.ModifyPortalContent"
     layer="collective.ai.summarizer.interfaces.ICollectiveAiSummarizerLayer"
     allowed_attributes="available summarize"
-    />
+  />
 
+  <!--  <utility-->
+  <!--    factory=".controlpanel.provide"-->
+  <!--    provides="collective.ai.core.interfaces.ICollectiveAiControlPanelFieldProvider"-->
+  <!--  />-->
 
   <browser:page
-    name="ai-summarizer-settings"
+    name="collective-ai-summarizer-settings"
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     class=".controlpanel.AiSummarizerControlPanelView"
     permission="cmf.ManagePortal"

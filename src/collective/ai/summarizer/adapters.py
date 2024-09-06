@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collective.ai.core.browser.controlpanel import IAiCoreSettings
 from collective.ai.summarizer.behaviors.ai_summarizable import IAiSummarizable
 from plone import api
 from plone import registry
@@ -25,13 +26,16 @@ class AiSummarizeAdapter(object):
     def summarize(self):
         from openai import OpenAI
         registry = getUtility(IRegistry)
-        settings = registry.forInterface(IAiSummarizerSettings, check=False)
-
-        prompt = settings.ai_summarizer_prompt.format(self.context.text.output)
+        ai_settings = registry.forInterface(IAiCoreSettings, check=False)
+        summarizer_settings = registry.forInterface(IAiSummarizerSettings, check=False)
+        prompt = summarizer_settings.ai_summarizer_prompt.format(self.context.text.output)
+        service_settings = ai_settings.ai_text_completion_services[0]
         client = OpenAI(
-            organization="",
-            api_key=""
+            base_url=service_settings["api_service_url"],
+            api_key=service_settings["api_key"],
+            **service_settings["extra_config"]
         )
+
         completion = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}]
@@ -51,6 +55,6 @@ class OpenAISummarizer:
         return text[:200]
 
 @implementer(ISummarizer)
-class OpenRouterSummarizer(Interface):
+class OpenRouterSummarizer:
     def summarize(self, text):
         return text[:200]

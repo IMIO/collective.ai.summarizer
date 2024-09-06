@@ -1,26 +1,24 @@
 # -*- coding: utf-8 -*-
+from collective.ai.core.browser.controlpanel import IAiCoreSettings, AiControlPanelFormWrapper
+from collective.ai.core.interfaces import ICollectiveAiControlPanelFieldProvider
 from collective.ai.summarizer import _
 from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper
 from plone.app.registry.browser.controlpanel import RegistryEditForm
 from plone.autoform import directives
+from plone.autoform.interfaces import IFormFieldProvider
+from plone.registry.interfaces import IRegistry
 from plone.z3cform import layout
+from plone.z3cform.fieldsets.interfaces import IFormExtender
+from z3c.form import field
 from z3c.form.browser.password import PasswordFieldWidget
+from z3c.form.interfaces import IFormLayer
 from zope import schema
-from zope.interface import Interface
+from plone.supermodel import model
+from zope.component import adapter
+from zope.interface import alsoProvides, provider, implementer, Interface
+
 
 class IAiSummarizerSettings(Interface):
-
-    ai_api_service_url = schema.URI(
-        title=_("ai_api_service_url"),
-        default="https://changeme.org",
-        required=False,
-    )
-    directives.widget("ai_api_key", PasswordFieldWidget)
-    ai_api_key = schema.TextLine(
-        title=_("ai_api_key"),
-        default="",
-        required=False,
-    )
 
     ai_summarizer_prompt = schema.Text(
         title=_("ai_summarizer_prompt"),
@@ -39,5 +37,5 @@ class AiSummarizerControlPanelForm(RegistryEditForm):
 
 
 AiSummarizerControlPanelView = layout.wrap_form(
-    AiSummarizerControlPanelForm, ControlPanelFormWrapper
+    AiSummarizerControlPanelForm, AiControlPanelFormWrapper
 )
