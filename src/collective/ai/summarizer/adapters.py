@@ -4,57 +4,48 @@ from collective.ai.summarizer.behaviors.ai_summarizable import IAiSummarizable
 from plone import api
 from plone import registry
 from plone.registry.interfaces import IRegistry
+from requests.packages import target
 from zope.component import getUtility, adapter
 from zope.interface import implementer, Interface
 from collective.ai.summarizer.browser.controlpanel import IAiSummarizerSettings
-
+from openai import OpenAI
 import logging
 
 logger = logging.getLogger("collective.ai.summarizer")
 
+
 class IAiSummarizeAdapter(Interface):
     """"""
+    def __init__(self, context, request):
+        pass
 
 @implementer(IAiSummarizeAdapter)
 @adapter(IAiSummarizable)
-class AiSummarizeAdapter(object):
+class AiSummarizeAdapter:
     """Handle summarization operations on an object"""
 
     def __init__(self, context):
         self.context = context
+        self.request = context.REQUEST
+        registry = getUtility(IRegistry)
+        self.settings = registry.forInterface(IAiSummarizerSettings, check=False)
+        self.summarizer_config = self.settings.summarizers[int(self.request.form['summarizer'])]
+
+    def target_field(self):
+        return self.summarizer_config['target_field']
+
+    def source_field(self):
+        return self.summarizer_config['source_field']
+
+    def get_input_text(self):
+        return getattr(self.context, self.source_field()).output
+
+    def set_output_text(self, text):
+        setattr(self.context, self.target_field(), text)
+
+    def prompt(self):
+        return self.summarizer_config['prompt']
 
     def summarize(self):
-        from openai import OpenAI
-        registry = getUtility(IRegistry)
-        ai_settings = registry.forInterface(IAiCoreSettings, check=False)
-        summarizer_settings = registry.forInterface(IAiSummarizerSettings, check=False)
-        prompt = summarizer_settings.ai_summarizer_prompt.format(self.context.text.output)
-        service_settings = ai_settings.ai_text_completion_services[0]
-        client = OpenAI(
-            base_url=service_settings["api_service_url"],
-            api_key=service_settings["api_key"],
-            **service_settings["extra_config"]
-        )
-
-        completion = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}]
-        )
-        self.context.summary = completion.choices[0].message.content
-
-
-
-
-class ISummarizer(Interface):
-    def summarize(self, text):
-        pass
-
-@implementer(ISummarizer)
-class OpenAISummarizer:
-    def summarize(self, text):
-        return text[:200]
-
-@implementer(ISummarizer)
-class OpenRouterSummarizer:
-    def summarize(self, text):
-        return text[:200]
+        import ipdb; ipdb.set_trace()  # TODO: remove me <----------------
+        self.set_output_text(summarizer.summarize(self.get_input_text(), self.prompt()))

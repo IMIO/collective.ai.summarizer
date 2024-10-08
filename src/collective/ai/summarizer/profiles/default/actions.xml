@@ -10,7 +10,7 @@
     </object>
   </object>
 
-  <object name="object_buttons" meta_type="CMF Action Category">
+  <object name="ai_actions" meta_type="CMF Action Category">
     <object name="ai_summarize" meta_type="CMF Action" i18n:domain="collective.ai.summarize">
       <property name="title" i18n:translate="">Summarize</property>
       <property name="description" i18n:translate="">Click to summarize this content.</property>

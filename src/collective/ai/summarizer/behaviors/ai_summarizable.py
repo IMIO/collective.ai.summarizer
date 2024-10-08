@@ -16,18 +16,10 @@ class IAiSummarizable(model.Schema):
     """
     """
 
-    summary = schema.Text(
-        title=_(u'Summary'),
-        description=_(u''),
-        required=False,
-    )
-
 
 @implementer(IAiSummarizable)
 @adapter(IAiSummarizable)
 class AiSummarizable(object):
-    def __init__(self, context):
-        self.context = context
 
     @property
     def summary(self):

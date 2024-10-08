@@ -19,9 +19,9 @@
   />
 
   <browser:page
-    name="ai-summarizer-view"
+    name="ai-summarizer-action"
     for="*"
-    class=".action.AiSummarizerView"
+    class=".action.AiSummarizerAction"
     permission="cmf.ModifyPortalContent"
     layer="collective.ai.summarizer.interfaces.ICollectiveAiSummarizerLayer"
     allowed_attributes="available summarize"

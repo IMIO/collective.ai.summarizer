@@ -17,7 +17,6 @@
   <include file="permissions.zcml"/>
 
 
-
   <genericsetup:registerProfile
     name="default"
     title="collective.ai.summarizer"
@@ -53,13 +52,13 @@
   />
 
   <utility
-    provides=".adapters.ISummarizer"
-    factory=".adapters.OpenAISummarizer"
-    name="openai-summarizer"
+    provides="collective.ai.core.interfaces.IAiActionsProvider"
+    factory=".action.SummarizerActions"
+    name="summarizer-actions"
   />
+
   <utility
-    provides=".adapters.ISummarizer"
-    factory=".adapters.OpenRouterSummarizer"
-    name="openrouter-summarizer"
+    name="collective.ai.summarizer.vocabularies.SummarizablePortalTypesVocabulary"
+    factory=".vocabularies.SummarizablePortalTypesVocabulary"
   />
 </configure>

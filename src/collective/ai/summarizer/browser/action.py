@@ -10,7 +10,7 @@ from zope.component import getAdapter
 logger = logging.getLogger("collective.ai.summarizer")
 
 
-class AiSummarizerView(BrowserView):
+class AiSummarizerAction(BrowserView):
 
     def available(self):
         """
@@ -20,6 +20,6 @@ class AiSummarizerView(BrowserView):
             return False
         return True
 
-    def summarize(self):
+    def __call__(self):
         handler = IAiSummarizeAdapter(self.context)
         handler.summarize()
