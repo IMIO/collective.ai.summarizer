@@ -23,3 +23,4 @@ class AiSummarizerAction(BrowserView):
     def __call__(self):
         handler = IAiSummarizeAdapter(self.context)
         handler.summarize()
+        self.request.response.redirect(self.context.absolute_url())

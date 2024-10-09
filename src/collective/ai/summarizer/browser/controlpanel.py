@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from collective.ai.core.browser.controlpanel import AiControlPanelFormWrapper
+from collective.ai.core.browser.controlpanel import AICoreControlPanelForm, AICoreControlPanelFormWrapper
 from collective.ai.core.interfaces import ICollectiveAiControlPanelFieldProvider
 from collective.ai.summarizer import _
 from collective.z3cform.datagridfield.blockdatagridfield import BlockDataGridFieldFactory
@@ -85,5 +85,5 @@ class AiSummarizerControlPanelForm(RegistryEditForm):
 
 
 AiSummarizerControlPanelView = layout.wrap_form(
-    AiSummarizerControlPanelForm, AiControlPanelFormWrapper
+    AiSummarizerControlPanelForm, AICoreControlPanelFormWrapper
 )
