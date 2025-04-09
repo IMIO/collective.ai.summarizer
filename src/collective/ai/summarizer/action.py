@@ -10,28 +10,37 @@ from zope.interface import implementer
 @implementer(IAIActionsProvider)
 class SummarizerActions:
     def __call__(self, context, request):
-        if not IAISummarizable.providedBy(context):
-            return []
+        # if not IAISummarizable.providedBy(context):
+        #     return []
         registry = getUtility(IRegistry)
         summarizer_settings = registry.forInterface(IAISummarizerSettings, check=False)
         results = []
-        if not hasattr(summarizer_settings, "summarizers") or not summarizer_settings.summarizers:
+        if (
+            not hasattr(summarizer_settings, "summarizers")
+            or not summarizer_settings.summarizers
+        ):
             return []
         for i, summarizer in enumerate(summarizer_settings.summarizers):
-            if context.portal_type != summarizer['portal_type'] or summarizer['active'] is False:
+            if (
+                context.portal_type != summarizer["portal_type"]
+                or summarizer["active"] is False
+            ):
                 continue
             results.append(
                 {
                     "title": summarizer["label"],
                     "description": "",
-                    "action": addTokenToUrl(f"{context.absolute_url()}/@@ai-summarizer-action?summarizer={i}", request),
+                    "action": addTokenToUrl(
+                        f"{context.absolute_url()}/@@ai-summarizer-action?summarizer={i}",
+                        request,
+                    ),
                     "selected": False,
                     "icon": "text-paragraph",
                     "extra": {
                         "id": "plone-contentmenu-actions-" + "id",
                         "separator": None,
-                        "class": 'cssClass',
-                        "modal": '',
+                        "class": "cssClass",
+                        "modal": "",
                     },
                     "submenu": None,
                 }

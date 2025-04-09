@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
-from collective.ai.core.browser.controlpanel import AICoreControlPanelForm, AICoreControlPanelFormWrapper
+from collective.ai.core.browser.controlpanel import (
+    AICoreControlPanelForm,
+    AICoreControlPanelFormWrapper,
+)
 from collective.ai.core.interfaces import ICollectiveAIControlPanelFieldProvider
 from collective.ai.summarizer import _
-from collective.z3cform.datagridfield.blockdatagridfield import BlockDataGridFieldFactory
+from collective.z3cform.datagridfield.blockdatagridfield import (
+    BlockDataGridFieldFactory,
+)
 from collective.z3cform.datagridfield.registry import DictRow
 from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper
 from plone.app.registry.browser.controlpanel import RegistryEditForm
@@ -34,7 +39,7 @@ class IAISummarizerRow(Interface):
 
     portal_type = schema.Choice(
         title=_("Portal type"),
-        vocabulary="collective.ai.summarizer.vocabularies.SummarizablePortalTypesVocabulary",
+        vocabulary="plone.app.vocabularies.ReallyUserFriendlyTypes",
         required=True,
     )
 
@@ -65,11 +70,11 @@ Résume ce texte en 2 paragraphes. Sois clair et concis.
         default=True,
     )
 
+
 class IAISummarizerSettings(Interface):
-    directives.widget('summarizers',
-                      BlockDataGridFieldFactory,
-                      allow_reorder=True,
-                      auto_append=False)
+    directives.widget(
+        "summarizers", BlockDataGridFieldFactory, allow_reorder=True, auto_append=False
+    )
     summarizers = schema.List(
         title=_("summarizers"),
         value_type=DictRow(
@@ -78,6 +83,7 @@ class IAISummarizerSettings(Interface):
         ),
         required=False,
     )
+
 
 class AISummarizerControlPanelForm(RegistryEditForm):
     label = _("AI Summarizer settings")
