@@ -12,14 +12,14 @@ from zope.interface import provider
 
 
 @provider(IFormFieldProvider)
-class IAiSummarizable(model.Schema):
+class IAISummarizable(model.Schema):
     """
     """
 
 
-@implementer(IAiSummarizable)
-@adapter(IAiSummarizable)
-class AiSummarizable(object):
+@implementer(IAISummarizable)
+@adapter(IAISummarizable)
+class AISummarizable(object):
 
     @property
     def summary(self):

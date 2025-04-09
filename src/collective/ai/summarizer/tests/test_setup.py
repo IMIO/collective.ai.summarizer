@@ -33,12 +33,12 @@ class TestSetup(unittest.TestCase):
             'collective.ai.summarizer'))
 
     def test_browserlayer(self):
-        """Test that ICollectiveAiSummarizerLayer is registered."""
+        """Test that ICollectiveAISummarizerLayer is registered."""
         from collective.ai.summarizer.interfaces import (
-            ICollectiveAiSummarizerLayer)
+            ICollectiveAISummarizerLayer)
         from plone.browserlayer import utils
         self.assertIn(
-            ICollectiveAiSummarizerLayer,
+            ICollectiveAISummarizerLayer,
             utils.registered_layers())
 
 
@@ -63,8 +63,8 @@ class TestUninstall(unittest.TestCase):
             'collective.ai.summarizer'))
 
     def test_browserlayer_removed(self):
-        """Test that ICollectiveAiSummarizerLayer is removed."""
+        """Test that ICollectiveAISummarizerLayer is removed."""
         from collective.ai.summarizer.interfaces import \
-            ICollectiveAiSummarizerLayer
+            ICollectiveAISummarizerLayer
         from plone.browserlayer import utils
-        self.assertNotIn(ICollectiveAiSummarizerLayer, utils.registered_layers())
+        self.assertNotIn(ICollectiveAISummarizerLayer, utils.registered_layers())

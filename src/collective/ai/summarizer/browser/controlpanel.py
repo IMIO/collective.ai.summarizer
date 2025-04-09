@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.ai.core.browser.controlpanel import AICoreControlPanelForm, AICoreControlPanelFormWrapper
-from collective.ai.core.interfaces import ICollectiveAiControlPanelFieldProvider
+from collective.ai.core.interfaces import ICollectiveAIControlPanelFieldProvider
 from collective.ai.summarizer import _
 from collective.z3cform.datagridfield.blockdatagridfield import BlockDataGridFieldFactory
 from collective.z3cform.datagridfield.registry import DictRow
@@ -20,7 +20,7 @@ from zope.component import adapter
 from zope.interface import alsoProvides, provider, implementer, Interface
 
 
-class IAiSummarizerRow(Interface):
+class IAISummarizerRow(Interface):
     label = schema.TextLine(
         title=_("Label"),
         required=True,
@@ -65,7 +65,7 @@ Résume ce texte en 2 paragraphes. Sois clair et concis.
         default=True,
     )
 
-class IAiSummarizerSettings(Interface):
+class IAISummarizerSettings(Interface):
     directives.widget('summarizers',
                       BlockDataGridFieldFactory,
                       allow_reorder=True,
@@ -74,16 +74,16 @@ class IAiSummarizerSettings(Interface):
         title=_("summarizers"),
         value_type=DictRow(
             title=_("summarizer"),
-            schema=IAiSummarizerRow,
+            schema=IAISummarizerRow,
         ),
         required=False,
     )
 
-class AiSummarizerControlPanelForm(RegistryEditForm):
+class AISummarizerControlPanelForm(RegistryEditForm):
     label = _("AI Summarizer settings")
-    schema = IAiSummarizerSettings
+    schema = IAISummarizerSettings
 
 
-AiSummarizerControlPanelView = layout.wrap_form(
-    AiSummarizerControlPanelForm, AICoreControlPanelFormWrapper
+AISummarizerControlPanelView = layout.wrap_form(
+    AISummarizerControlPanelForm, AICoreControlPanelFormWrapper
 )

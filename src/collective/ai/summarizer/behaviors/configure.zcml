@@ -11,11 +11,11 @@
 
     <plone:behavior
         name="collective.ai.summarizer.ai_summarizable"
-        title="AiSummarizable"
+        title="AISummarizable"
         description="Provide AI summary capabalities"
-        factory=".ai_summarizable.AiSummarizable"
-        provides=".ai_summarizable.IAiSummarizable"
-        marker=".ai_summarizable.IAiSummarizable"
+        factory=".summarizable.AISummarizable"
+        provides=".summarizable.IAISummarizable"
+        marker=".summarizable.IAISummarizable"
         />
 
 

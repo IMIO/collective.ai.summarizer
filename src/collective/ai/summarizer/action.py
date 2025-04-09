@@ -1,19 +1,19 @@
-from collective.ai.core.interfaces import IAiActionsProvider
-from collective.ai.summarizer.behaviors.ai_summarizable import IAiSummarizable
-from collective.ai.summarizer.browser.controlpanel import IAiSummarizerSettings
+from collective.ai.core.interfaces import IAIActionsProvider
+from collective.ai.summarizer.behaviors.summarizable import IAISummarizable
+from collective.ai.summarizer.browser.controlpanel import IAISummarizerSettings
 from plone.protect.utils import addTokenToUrl
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 from zope.interface import implementer
 
 
-@implementer(IAiActionsProvider)
+@implementer(IAIActionsProvider)
 class SummarizerActions:
     def __call__(self, context, request):
-        if not IAiSummarizable.providedBy(context):
+        if not IAISummarizable.providedBy(context):
             return []
         registry = getUtility(IRegistry)
-        summarizer_settings = registry.forInterface(IAiSummarizerSettings, check=False)
+        summarizer_settings = registry.forInterface(IAISummarizerSettings, check=False)
         results = []
         if not hasattr(summarizer_settings, "summarizers") or not summarizer_settings.summarizers:
             return []

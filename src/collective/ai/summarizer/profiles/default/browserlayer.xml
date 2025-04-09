@@ -2,6 +2,6 @@
 <layers>
   <layer
       name="collective.ai.summarizer"
-      interface="collective.ai.summarizer.interfaces.ICollectiveAiSummarizerLayer"
+      interface="collective.ai.summarizer.interfaces.ICollectiveAISummarizerLayer"
       />
 </layers>

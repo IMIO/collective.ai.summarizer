@@ -46,13 +46,13 @@
   <include package=".browser"/>
 
   <adapter
-    factory=".adapters.AiSummarizeAdapter"
-    provides=".adapters.IAiSummarizeAdapter"
-    for="collective.ai.summarizer.behaviors.ai_summarizable.IAiSummarizable"
+    factory=".adapters.AISummarizeAdapter"
+    provides=".adapters.IAISummarizeAdapter"
+    for="collective.ai.summarizer.behaviors.summarizable.IAISummarizable"
   />
 
   <utility
-    provides="collective.ai.core.interfaces.IAiActionsProvider"
+    provides="collective.ai.core.interfaces.IAIActionsProvider"
     factory=".action.SummarizerActions"
     name="summarizer-actions"
   />

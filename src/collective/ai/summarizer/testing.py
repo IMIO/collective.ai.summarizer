@@ -12,7 +12,7 @@ from plone.testing import z2
 import collective.ai.summarizer
 
 
-class CollectiveAiSummarizerLayer(PloneSandboxLayer):
+class CollectiveAISummarizerLayer(PloneSandboxLayer):
 
     defaultBases = (PLONE_FIXTURE,)
 
@@ -30,18 +30,18 @@ class CollectiveAiSummarizerLayer(PloneSandboxLayer):
         applyProfile(portal, 'collective.ai.summarizer:default')
 
 
-COLLECTIVE_AI_SUMMARIZER_FIXTURE = CollectiveAiSummarizerLayer()
+COLLECTIVE_AI_SUMMARIZER_FIXTURE = CollectiveAISummarizerLayer()
 
 
 COLLECTIVE_AI_SUMMARIZER_INTEGRATION_TESTING = IntegrationTesting(
     bases=(COLLECTIVE_AI_SUMMARIZER_FIXTURE,),
-    name='CollectiveAiSummarizerLayer:IntegrationTesting',
+    name='CollectiveAISummarizerLayer:IntegrationTesting',
 )
 
 
 COLLECTIVE_AI_SUMMARIZER_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(COLLECTIVE_AI_SUMMARIZER_FIXTURE,),
-    name='CollectiveAiSummarizerLayer:FunctionalTesting',
+    name='CollectiveAISummarizerLayer:FunctionalTesting',
 )
 
 
@@ -51,5 +51,5 @@ COLLECTIVE_AI_SUMMARIZER_ACCEPTANCE_TESTING = FunctionalTesting(
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
         z2.ZSERVER_FIXTURE,
     ),
-    name='CollectiveAiSummarizerLayer:AcceptanceTesting',
+    name='CollectiveAISummarizerLayer:AcceptanceTesting',
 )

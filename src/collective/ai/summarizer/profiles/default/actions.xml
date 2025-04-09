@@ -6,7 +6,7 @@
     <object name="collective.ai.summarizer" meta_type="CMF Action">
       <property name="title" i18n:translate="">Summarizer</property>
       <property name="url_expr">string:${portal_url}/@@collective-ai-summarizer-settings</property>
-      <property name="icon_expr">string:bi bi-cpu</property>
+      <property name="icon_expr">string:text-paragraph</property>
     </object>
   </object>
 

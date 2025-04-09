@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from collective.ai.summarizer.behaviors.ai_summarizable import IAiSummarizable
+from collective.ai.summarizer.behaviors.summarizable import IAISummarizable
 from collective.ai.summarizer.testing import COLLECTIVE_AI_SUMMARIZER_INTEGRATION_TESTING  # noqa
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -9,7 +9,7 @@ from zope.component import getUtility
 import unittest
 
 
-class AiSummarizableIntegrationTest(unittest.TestCase):
+class AISummarizableIntegrationTest(unittest.TestCase):
 
     layer = COLLECTIVE_AI_SUMMARIZER_INTEGRATION_TESTING
 
@@ -22,5 +22,5 @@ class AiSummarizableIntegrationTest(unittest.TestCase):
         behavior = getUtility(IBehavior, 'collective.ai.summarizer.ai_summarizable')
         self.assertEqual(
             behavior.marker,
-            IAiSummarizable,
+            IAISummarizable,
         )

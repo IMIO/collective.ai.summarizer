@@ -8,7 +8,7 @@
   <include package="z3c.jbot" file="meta.zcml"/>
   <browser:jbot
     directory="overrides"
-    layer="collective.ai.summarizer.interfaces.ICollectiveAiSummarizerLayer"
+    layer="collective.ai.summarizer.interfaces.ICollectiveAISummarizerLayer"
   />
 
   <!-- Publish static files -->
@@ -21,23 +21,23 @@
   <browser:page
     name="ai-summarizer-action"
     for="*"
-    class=".action.AiSummarizerAction"
+    class=".action.AISummarizerAction"
     permission="cmf.ModifyPortalContent"
-    layer="collective.ai.summarizer.interfaces.ICollectiveAiSummarizerLayer"
-    allowed_attributes="available summarize"
+    layer="collective.ai.summarizer.interfaces.ICollectiveAISummarizerLayer"
+    allowed_attributes="available"
   />
 
   <!--  <utility-->
   <!--    factory=".controlpanel.provide"-->
-  <!--    provides="collective.ai.core.interfaces.ICollectiveAiControlPanelFieldProvider"-->
+  <!--    provides="collective.ai.core.interfaces.ICollectiveAIControlPanelFieldProvider"-->
   <!--  />-->
 
   <browser:page
     name="collective-ai-summarizer-settings"
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    class=".controlpanel.AiSummarizerControlPanelView"
+    class=".controlpanel.AISummarizerControlPanelView"
     permission="cmf.ManagePortal"
-    layer="collective.ai.summarizer.interfaces.ICollectiveAiSummarizerLayer"
+    layer="collective.ai.summarizer.interfaces.ICollectiveAISummarizerLayer"
   />
 
 </configure>
