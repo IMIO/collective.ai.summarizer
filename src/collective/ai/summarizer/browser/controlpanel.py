@@ -88,7 +88,7 @@ class IAISummarizerSettings(Interface):
 class AISummarizerControlPanelForm(RegistryEditForm):
     label = _("AI Summarizer settings")
     schema = IAISummarizerSettings
-
+    ignoreRequiredOnExtract = True
 
 AISummarizerControlPanelView = layout.wrap_form(
     AISummarizerControlPanelForm, AICoreControlPanelFormWrapper
