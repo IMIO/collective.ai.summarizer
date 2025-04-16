@@ -55,16 +55,4 @@ class AISummarizeAdapter:
         service_type = self.ai_settings.text_completion_services[int(config_id)]["service_type"]
         service = getAdapter(self.context, IAIAPIService, service_type)
         service(int(config_id), model_id)
-
-        # client = OpenAI(
-        #     base_url=service_settings["api_service_url"],
-        #     api_key=service_settings["api_key"],
-        #     **service_settings["extra_config"]
-        # )
-        # completion = client.chat.completions.create(
-        #     model="gpt-4o-mini",
-        #     messages=[{"role": "user", "content": )}]
-        # )
-
-        # self.set_output_text(completion.choices[0].message.content)
         self.set_output_text(service.complete(self.prompt().format(self.get_input_text())))
